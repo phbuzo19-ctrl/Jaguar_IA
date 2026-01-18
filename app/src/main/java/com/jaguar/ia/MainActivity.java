@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,18 +18,23 @@ public class MainActivity extends Activity {
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setGravity(Gravity.CENTER);
         layout.setBackgroundColor(Color.parseColor("#121212"));
-        layout.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-        ));
 
         TextView tv = new TextView(this);
-        tv.setText("Jaguar IA funcionando 🚀");
-        tv.setTextSize(26);
+        tv.setText("Jaguar IA em espera...");
+        tv.setTextSize(24);
         tv.setTextColor(Color.WHITE);
-        tv.setGravity(Gravity.CENTER);
+        tv.setPadding(0, 0, 0, 40);
+
+        Button btn = new Button(this);
+        btn.setText("Ativar Jaguar 🐆");
+
+        btn.setOnClickListener(v -> {
+            tv.setText("Jaguar IA ATIVA 🚀");
+        });
 
         layout.addView(tv);
+        layout.addView(btn);
+
         setContentView(layout);
     }
 }
