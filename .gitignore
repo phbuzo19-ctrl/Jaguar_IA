@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+
+# Banco local
+data/knowledge.db
+
+# Logs
+logs/
+
+# Flutter
+.build/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Termux
+*.log
