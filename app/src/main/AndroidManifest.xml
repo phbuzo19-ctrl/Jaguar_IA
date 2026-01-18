@@ -3,7 +3,7 @@
     <application
         android:label="JaguarIA"
         android:allowBackup="true"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar">
+        android:theme="@style/Theme.JaguarIA">
 
         <activity
             android:name=".MainActivity"
