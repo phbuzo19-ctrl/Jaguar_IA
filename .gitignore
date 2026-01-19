@@ -1,31 +1,20 @@
-# =========================
 # Gradle
-# =========================
 .gradle/
 build/
 app/build/
 
-# =========================
+# Gradle local (NUNCA subir)
+gradle-*/
+*.zip
+
 # Android outputs
-# =========================
 *.apk
 *.aab
 
-# =========================
 # Keystore (NUNCA subir)
-# =========================
 *.keystore
 keystore.properties
 
-# =========================
-# Android Studio / IDE
-# =========================
+# IDE
 .idea/
 *.iml
-.local.properties
-
-# =========================
-# OS files
-# =========================
-.DS_Store
-Thumbs.db
