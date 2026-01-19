@@ -1,24 +1,26 @@
+# =========================
 # Gradle
+# =========================
 .gradle/
 build/
 app/build/
 
-# Wrapper jar local (não versionar)
-gradle/wrapper/gradle-wrapper.jar
+# =========================
+# Android / IDE
+# =========================
+.idea/
+.cxx/
+local.properties
+*.log
 
-# Android
+# =========================
+# Outputs
+# =========================
 *.apk
 *.aab
 
-# Keystore (NUNCA subir)
+# =========================
+# Segurança - NUNCA subir
+# =========================
 *.keystore
 keystore.properties
-
-# IDE
-.idea/
-.vscode/
-
-# Pastas duplicadas / locais
-Jaguar_IA/
-JaguarIA-APK/
-gradle-8.*/
