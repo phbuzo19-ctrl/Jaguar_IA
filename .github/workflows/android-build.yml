@@ -1,39 +1,41 @@
-name: Build Android AAB
+name: Android APK Build
 
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
+    name: Build Debug APK
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout código
         uses: actions/checkout@v4
 
-      - name: Setup Java
+      - name: Configurar Java 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      - name: Setup Android SDK
+      - name: Configurar Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Grant Gradle permission
-        run: chmod +x gradlew
+      - name: Permissão do Gradle
+        run: chmod +x ./gradlew
 
-      - name: Build AAB (Release)
-        run: ./gradlew bundleRelease
+      - name: Build APK Debug
+        run: ./gradlew clean assembleDebug
 
-      - name: DEBUG — listar arquivos gerados
+      - name: DEBUG — localizar APK
         run: |
-          echo "===== AAB encontrados ====="
-          find . -name "*.aab"
+          echo "===== APKs encontrados ====="
+          find . -type f -name "*.apk"
 
-      - name: Upload AAB
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: jaguar-aab
-          path: app/build/outputs/bundle/release/*.aab
+          name: Jaguar-IA-Debug-APK
+          path: app/build/outputs/apk/debug/*.apk
