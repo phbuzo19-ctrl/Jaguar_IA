@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Android CI/CD
 
 on:
   push:
@@ -9,31 +9,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Java 17
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - uses: android-actions/setup-android@v3
 
       - name: Grant Gradle Permission
         run: chmod +x gradlew
 
-      - name: Build Debug APK
-        run: ./gradlew clean assembleDebug
+      - name: Build AAB
+        run: ./gradlew clean bundleRelease
 
-      - name: Debug APK files
+      - name: Debug outputs
         run: |
-          echo "=== APKs encontrados ==="
-          find app/build/outputs -name "*.apk"
+          find app/build/outputs -type f
 
-      - name: Upload APK
+      - name: Upload AAB
         uses: actions/upload-artifact@v4
         with:
-          name: jaguar-apk
-          path: app/build/outputs/**/*.apk
+          name: jaguar-aab
+          path: app/build/outputs/bundle/release/*.aab
