@@ -3,50 +3,44 @@ name: Build Android APK (Jaguar IA)
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout do repositório
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      # 2️⃣ Java 17 (compatível com Gradle moderno)
       - name: Configurar Java 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      # 3️⃣ Android SDK
       - name: Configurar Android SDK
         uses: android-actions/setup-android@v3
 
-      # 4️⃣ Permissão do Gradle Wrapper
-      - name: Permitir execução do Gradle
-        run: chmod +x ./gradlew
+      - name: Dar permissão ao Gradle
+        run: chmod +x gradlew
 
-      # 5️⃣ Limpar build anterior
       - name: Limpar projeto
         run: ./gradlew clean
 
-      # 6️⃣ Compilar APK DEBUG
       - name: Compilar APK Debug
         run: ./gradlew assembleDebug
 
-      # 7️⃣ 🔍 DEBUG — listar APKs gerados (PASSO CRÍTICO)
-      - name: Listar APKs gerados
+      # 🔍 PASSO DE DEBUG (ESSENCIAL)
+      - name: Listar arquivos gerados
         run: |
-          echo "====== APKs encontrados ======"
-          find app/build -type f | grep ".apk" || true
+          echo "=== LISTANDO app/build ==="
+          ls -R app/build || true
 
-      # 8️⃣ Upload do APK (path seguro)
-      - name: Upload do APK
+      # ⬆️ UPLOAD CORRETO DO APK
+      - name: Upload do APK Debug
         uses: actions/upload-artifact@v4
         with:
           name: Jaguar-IA-APK
-          path: app/build/**/**/*.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
