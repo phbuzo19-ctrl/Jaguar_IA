@@ -1,33 +1,38 @@
 package com.jaguar.ia;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText inputQuestion;
+    private Button btnAsk;
+    private TextView outputAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
-        EditText inputPergunta = findViewById(R.id.inputPergunta);
-        Button btnEnviar = findViewById(R.id.btnEnviar);
-        TextView txtResposta = findViewById(R.id.txtResposta);
+        inputQuestion = findViewById(R.id.inputQuestion);
+        btnAsk = findViewById(R.id.btnAsk);
+        outputAnswer = findViewById(R.id.outputAnswer);
 
-        btnEnviar.setOnClickListener(new View.OnClickListener() {
+        btnAsk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pergunta = inputPergunta.getText().toString().trim();
+                String pergunta = inputQuestion.getText().toString().trim();
 
                 if (pergunta.isEmpty()) {
-                    txtResposta.setText("Digite uma pergunta 🐆");
+                    outputAnswer.setText("Digite uma pergunta.");
                 } else {
-                    txtResposta.setText("Jaguar IA recebeu:\n\n" + pergunta);
+                    // RESPOSTA TEMPORÁRIA (base para IA)
+                    outputAnswer.setText("Você perguntou:\n\n" + pergunta);
                 }
             }
         });
