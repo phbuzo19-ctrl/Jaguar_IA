@@ -1,26 +1,19 @@
-# =========================
 # Gradle
-# =========================
 .gradle/
 build/
 app/build/
 
-# =========================
-# Android / IDE
-# =========================
-.idea/
-.cxx/
-local.properties
-*.log
+# Gradle local (NUNCA subir)
+gradle-*/
+*.zip
 
-# =========================
-# Outputs
-# =========================
+# Android
 *.apk
 *.aab
 
-# =========================
-# Segurança - NUNCA subir
-# =========================
+# Keystore (NUNCA subir)
 *.keystore
 keystore.properties
+
+# Pastas locais duplicadas
+Jaguar_IA/
