@@ -1,31 +1,30 @@
-name: Build APK JaguarIA
+name: Build Jaguar-IA APK
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do repositório
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configurar Java 17
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Dar permissão ao Gradle Wrapper
+      - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Compilar APK Debug
+      - name: Build Debug APK
         run: ./gradlew assembleDebug
 
-      - name: Publicar APK como artefato
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: JaguarIA-APK
