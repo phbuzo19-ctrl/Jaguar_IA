@@ -1,39 +1,35 @@
-name: Build Android APK
+name: Build Jaguar IA APK
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout do código
-      uses: actions/checkout@v4
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-    - name: Configurar Java 17
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
 
-    - name: Configurar Android SDK
-      uses: android-actions/setup-android@v3
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v3
 
-    - name: Permissão do Gradle
-      run: chmod +x gradlew
+      - name: Permissão Gradle
+        run: chmod +x ./gradlew
 
-    - name: Limpar projeto
-      run: ./gradlew clean
+      - name: Limpar projeto
+        run: ./gradlew clean
 
-    - name: Compilar APK Debug
-      run: ./gradlew assembleDebug
+      - name: Build APK Debug
+        run: ./gradlew assembleDebug
 
-    - name: Upload do APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: Jaguar-IA-APK
-        path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Upload do APK
+        uses: actions/upload-artifact@v4
