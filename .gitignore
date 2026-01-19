@@ -1,17 +1,24 @@
-# Python
-__pycache__/
-*.pyc
+# Gradle
+.gradle/
+build/
+app/build/
 
-# Banco local
-data/knowledge.db
+# Wrapper jar local (não versionar)
+gradle/wrapper/gradle-wrapper.jar
 
-# Logs
-logs/
+# Android
+*.apk
+*.aab
 
-# Flutter
-.build/
-.flutter-plugins
-.flutter-plugins-dependencies
+# Keystore (NUNCA subir)
+*.keystore
+keystore.properties
 
-# Termux
-*.log
+# IDE
+.idea/
+.vscode/
+
+# Pastas duplicadas / locais
+Jaguar_IA/
+JaguarIA-APK/
+gradle-8.*/

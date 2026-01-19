@@ -1,11 +1,10 @@
 package com.jaguar.ia;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -14,27 +13,23 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setGravity(Gravity.CENTER);
-        layout.setBackgroundColor(Color.parseColor("#121212"));
+        setContentView(R.layout.activity_main);
 
-        TextView tv = new TextView(this);
-        tv.setText("Jaguar IA em espera...");
-        tv.setTextSize(24);
-        tv.setTextColor(Color.WHITE);
-        tv.setPadding(0, 0, 0, 40);
+        EditText inputPergunta = findViewById(R.id.inputPergunta);
+        Button btnEnviar = findViewById(R.id.btnEnviar);
+        TextView txtResposta = findViewById(R.id.txtResposta);
 
-        Button btn = new Button(this);
-        btn.setText("Ativar Jaguar 🐆");
+        btnEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pergunta = inputPergunta.getText().toString().trim();
 
-        btn.setOnClickListener(v -> {
-            tv.setText("Jaguar IA ATIVA 🚀");
+                if (pergunta.isEmpty()) {
+                    txtResposta.setText("Digite uma pergunta 🐆");
+                } else {
+                    txtResposta.setText("Jaguar IA recebeu:\n\n" + pergunta);
+                }
+            }
         });
-
-        layout.addView(tv);
-        layout.addView(btn);
-
-        setContentView(layout);
     }
 }
