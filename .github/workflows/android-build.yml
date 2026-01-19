@@ -3,7 +3,8 @@ name: Build Android APK (Jaguar IA)
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch:
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -22,8 +23,8 @@ jobs:
       - name: Configurar Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Dar permissão ao Gradle
-        run: chmod +x gradlew
+      - name: Permissão do Gradle
+        run: chmod +x ./gradlew
 
       - name: Limpar projeto
         run: ./gradlew clean
@@ -31,16 +32,23 @@ jobs:
       - name: Compilar APK Debug
         run: ./gradlew assembleDebug
 
-      # 🔍 PASSO DE DEBUG (ESSENCIAL)
+      # 🔍 DEBUG CRÍTICO — NUNCA REMOVA
       - name: Listar arquivos gerados
         run: |
-          echo "=== LISTANDO app/build ==="
-          ls -R app/build || true
+          echo "===== ROOT ====="
+          ls -la
+          echo "===== APP ====="
+          ls -la app || true
+          echo "===== BUILD ====="
+          ls -la app/build || true
+          echo "===== OUTPUTS ====="
+          ls -la app/build/outputs || true
+          echo "===== APK ====="
+          find app -name "*.apk" || true
 
-      # ⬆️ UPLOAD CORRETO DO APK
-      - name: Upload do APK Debug
+      # 📦 UPLOAD CORRETO
+      - name: Upload do APK
         uses: actions/upload-artifact@v4
         with:
           name: Jaguar-IA-APK
           path: app/build/outputs/apk/debug/app-debug.apk
-          if-no-files-found: error
