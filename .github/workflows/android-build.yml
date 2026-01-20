@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout código
+      - name: Checkout do código
         uses: actions/checkout@v4
 
       - name: Configurar Java 17
@@ -23,19 +23,19 @@ jobs:
       - name: Configurar Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Permissão do Gradle
+      - name: Permitir execução do Gradle
         run: chmod +x ./gradlew
 
       - name: Build APK Debug
         run: ./gradlew clean assembleDebug
 
-      - name: DEBUG — localizar APK
+      - name: Localizar APK
         run: |
           echo "===== APKs encontrados ====="
-          find . -type f -name "*.apk"
+          find app/build/outputs -name "*.apk"
 
-      - name: Upload APK
+      - name: Upload do APK
         uses: actions/upload-artifact@v4
         with:
-          name: Jaguar-IA-Debug-APK
+          name: Jaguaria-Debug-APK
           path: app/build/outputs/apk/debug/*.apk
