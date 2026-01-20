@@ -1,16 +1,2 @@
 // build.gradle (raiz)
-// Arquivo mínimo e correto para projetos Android modernos
-
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
+// Intencionalmente vazio
